@@ -12,15 +12,15 @@ public class Student {
     private String dob;
     private int ID;
     private String username;
-    private ArrayList<Course> courses;
+    private Course course;
     private ArrayList<Module> modules;
 
-    public Student(String name, int age, String dob, int ID, ArrayList<Course> courses, ArrayList<Module> modules) {
+    public Student(String name, int age, String dob, int ID, Course course, ArrayList<Module> modules) {
         this.name = name;
         this.age = age;
         this.dob = dob;
         this.ID = ID;
-        this.courses = courses;
+        this.course = course;
         this.modules = modules;
         this.username = getUsername(name, age);
     }
@@ -72,12 +72,12 @@ public class Student {
         this.ID = ID;
     }
 
-    public ArrayList<Course> getCourses() {
-        return courses;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public ArrayList<Module> getModules() {
