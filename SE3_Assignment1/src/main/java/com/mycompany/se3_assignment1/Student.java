@@ -28,7 +28,6 @@ public class Student {
     
     public String getUsername(String name, int age){
         String username = name + "_" + Integer.toString(age);
-        System.out.println(username);
         return username;        
     }
 
@@ -77,23 +76,44 @@ public class Student {
     }
 
     public void setCourse(Course course) {
-        this.course = course;
+        if(!this.course.equals(course)){
+            this.course = course;
+            course.addStudent(this);
+        }
     }
-
+    
+    public void removeCourse(Course course){
+        if(this.course.equals(course)){
+            this.course = null;
+            course.removeStudent(this);
+        }
+    }
+    
     public ArrayList<Module> getModules() {
         return modules;
     }
 
     public void setModules(ArrayList<Module> modules) {
-        this.modules = modules;
+        for (int i=0; i < modules.size(); i++){
+            if(!this.modules.contains(modules.get(i))){
+                this.modules.add(modules.get(i));
+                modules.get(i).addStudent(this);
+            }
+        }
     }
     
     public void addModule(Module module){
-        modules.add(module);
+        if(!this.modules.contains(module)){
+            modules.add(module);
+            module.addStudent(this);
+        }
     }
     
     public void removeModule(Module module){
-        modules.remove(module);
+        if(this.modules.contains(module)){
+            modules.remove(module);
+            module.removeStudent(this);
+        }
     }
     
 }

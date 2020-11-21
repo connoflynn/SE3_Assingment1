@@ -14,6 +14,10 @@ public class Course {
     private DateTime startDate;
     private DateTime endDate;
 
+    public Course(String name){
+        this.name = name;
+    }
+    
     public Course(String name, ArrayList<Module> modules, ArrayList<Student> students, DateTime startDate, DateTime endDate) {
         this.name = name;
         this.modules = modules;
@@ -35,7 +39,12 @@ public class Course {
     }
 
     public void setModules(ArrayList<Module> modules) {
-        this.modules = modules;
+        for (int i=0; i < modules.size(); i++){
+            if(!this.modules.contains(modules.get(i))){
+                this.modules.add(modules.get(i));
+                modules.get(i).addCourse(this);
+            }
+        }
     }
 
     public ArrayList<Student> getStudents() {
@@ -43,7 +52,12 @@ public class Course {
     }
 
     public void setStudents(ArrayList<Student> students) {
-        this.students = students;
+        for (int i=0; i < students.size(); i++){
+            if(!this.students.contains(students.get(i))){
+                this.students.add(students.get(i));
+                students.get(i).setCourse(this);
+            }
+        }
     }
 
     public DateTime getStartDate() {
@@ -62,5 +76,37 @@ public class Course {
         this.endDate = endDate;
     }
     
+    public void addModule(Module module){
+        if(!this.modules.contains(module)){
+            this.modules.add(module);
+            module.addCourse(this);
+        }
+    }
+    
+    public void removeModule(Module module){
+        if(this.modules.contains(module)){
+            this.modules.remove(module);
+            module.removeCourse(this);
+        }
+    }
+    
+    public void addStudent(Student student){
+        if(!this.students.contains(student)){
+            this.students.add(student);
+            student.setCourse(this);
+        }
+    }
+    
+    public void removeStudent(Student student){
+        if(this.students.contains(student)){
+            this.students.remove(student);
+            student.removeCourse(this);
+        }
+    }
+    
+    @Override
+    public String toString(){
+        return this.name;
+    }
     
 }

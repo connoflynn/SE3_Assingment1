@@ -40,7 +40,12 @@ public class Module {
     }
 
     public void setStudents(ArrayList<Student> students) {
-        this.students = students;
+        for (int i=0; i < students.size(); i++){
+            if(!this.students.contains(students.get(i))){
+                this.students.add(students.get(i));
+                students.get(i).addModule(this);
+            }
+        }
     }
 
     public ArrayList<Course> getCourses() {
@@ -48,9 +53,45 @@ public class Module {
     }
 
     public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses;
+        for (int i=0; i < courses.size(); i++){
+            if(!this.courses.contains(courses.get(i))){
+                this.courses.add(courses.get(i));
+                courses.get(i).addModule(this);
+            }
+        }
+    }
+    
+    public void addStudent(Student student){
+        if(!this.students.contains(student)){
+            students.add(student);
+            student.addModule(this);
+        }
+    }
+    
+    public void removeStudent(Student student){
+        if(this.students.contains(student)){
+            students.remove(student);
+            student.removeModule(this);
+        }
+    }
+    
+    public void addCourse(Course course){
+        if(!this.courses.contains(course)){
+            courses.add(course);
+            course.addModule(this);
+        }
+    }
+    
+    public void removeCourse(Course course){
+        if(this.courses.contains(course)){
+            courses.remove(course);
+            course.removeModule(this);
+        }
     }
 
-    
+    @Override
+    public String toString(){
+        return this.name;
+    }
     
 }
