@@ -62,8 +62,12 @@ public class Course {
     public void setStudents(ArrayList<Student> students) {
         if(this.students == null){
             this.students = students;
+            //Adds the students to the list of students in the modules asociated with the course
             for (int i=0; i < students.size(); i++){
                 students.get(i).setCourse(this);
+                for(int j = 0; j < this.modules.size(); j++){
+                    this.modules.get(j).addStudent(students.get(i));
+                }
             }
         }
         else{
@@ -71,6 +75,9 @@ public class Course {
                 if(!this.students.contains(students.get(i))){
                     this.students.add(students.get(i));
                     students.get(i).setCourse(this);
+                    for(int j = 0; j < this.modules.size(); j++){
+                        this.modules.get(j).addStudent(students.get(i));
+                    }
                 }
             }
         }
@@ -96,6 +103,10 @@ public class Course {
         if(!this.modules.contains(module)){
             this.modules.add(module);
             module.addCourse(this);
+            //Adds the module to each student asociated with the course
+            for(int i = 0; i < this.students.size(); i++){
+                this.students.get(i).addModule(module);
+            }
         }
     }
     
@@ -103,6 +114,10 @@ public class Course {
         if(this.modules.contains(module)){
             this.modules.remove(module);
             module.removeCourse(this);
+            //Removes the module from each student asociated with the course
+            for(int i = 0; i < this.students.size(); i++){
+                this.students.get(i).removeModule(module);
+            }
         }
     }
     
@@ -110,6 +125,10 @@ public class Course {
         if(!this.students.contains(student)){
             this.students.add(student);
             student.setCourse(this);
+            //Adds the student to each module asociated with the course
+            for(int i = 0; i < this.modules.size(); i++){
+                this.modules.get(i).addStudent(student);
+            }
         }
     }
     
@@ -117,6 +136,10 @@ public class Course {
         if(this.students.contains(student)){
             this.students.remove(student);
             student.removeCourse(this);
+            // Removes the student from all modules asociated with the course
+            for(int i = 0; i < this.modules.size(); i++){
+                this.modules.get(i).removeStudent(student);
+            }
         }
     }
     

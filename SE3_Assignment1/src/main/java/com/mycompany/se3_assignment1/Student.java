@@ -92,6 +92,10 @@ public class Student {
             this.course = course;
             course.addStudent(this);
         }
+        // Adding all the modules asociated with that course to the students modules
+        for(int i = 0; i < course.getModules().size(); i++){
+            this.addModule(course.getModules().get(i));
+        }
     }
     
     public void removeCourse(Course course){
@@ -101,6 +105,10 @@ public class Student {
         if(this.course.equals(course)){
             this.course = null;
             course.removeStudent(this);
+            // Removing all the modules asociated with that course from the students modules
+            for(int i = 0; i < course.getModules().size(); i++){
+                this.removeModule(course.getModules().get(i));
+            }
         }
     }
     
