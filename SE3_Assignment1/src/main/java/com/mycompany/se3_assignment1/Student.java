@@ -149,7 +149,9 @@ public class Student {
     
     @Override
     public String toString(){
-        return this.name + " " + ID;
+        String output = "";
+        output += "Name: " + this.name + "\tID: " + this.ID + "\tUsername: " +this.username;
+        return output;
     }
     
 }

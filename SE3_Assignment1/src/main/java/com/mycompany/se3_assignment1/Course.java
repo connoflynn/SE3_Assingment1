@@ -145,7 +145,21 @@ public class Course {
     
     @Override
     public String toString(){
-        return this.name;
+        String output = "";
+        output += "\nCourse:\n";
+        output += "Name: " + this.name + "\n";
+        output += "Start Date: " + this.startDate.toString("dd/MM/yyyy") + "\n";
+        output += "End Date: " + this.endDate.toString("dd/MM/yyyy") + "\n";
+        output += "Modules: \n";
+        for(int i=0; i < modules.size(); i++){
+            output += modules.get(i).toString() + "\n";
+        }
+        output += "Students Enrolled: \n";
+        for(int i=0; i < students.size(); i++){
+            output += students.get(i).toString() + "\n";
+        }
+        output += "\n\n";
+        return output;
     }
     
 }

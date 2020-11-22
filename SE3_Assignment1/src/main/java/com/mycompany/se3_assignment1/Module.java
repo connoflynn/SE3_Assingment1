@@ -112,7 +112,9 @@ public class Module {
 
     @Override
     public String toString(){
-        return this.name;
+        String output = "";
+        output +="Name: " + this.name + " (" + this.module_id + ")";
+        return output;
     }
     
 }
