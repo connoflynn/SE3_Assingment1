@@ -12,6 +12,11 @@ public class Module {
     private ArrayList<Student> students = new ArrayList<Student>();
     private ArrayList<Course> courses = new ArrayList<Course>();
 
+    public Module(String name, String module_id){
+        this.name = name;
+        this.module_id = module_id;
+    }
+    
     public Module(String name, String module_id, ArrayList<Student> students, ArrayList<Course> courses) {
         this.name = name;
         this.module_id = module_id;
@@ -40,10 +45,18 @@ public class Module {
     }
 
     public void setStudents(ArrayList<Student> students) {
-        for (int i=0; i < students.size(); i++){
-            if(!this.students.contains(students.get(i))){
-                this.students.add(students.get(i));
+        if(this.students == null){
+            this.students = students;
+            for (int i=0; i < courses.size(); i++){
                 students.get(i).addModule(this);
+            }
+        }
+        else{
+            for (int i=0; i < students.size(); i++){
+                if(!this.students.contains(students.get(i))){
+                    this.students.add(students.get(i));
+                    students.get(i).addModule(this);
+                }
             }
         }
     }
@@ -53,10 +66,18 @@ public class Module {
     }
 
     public void setCourses(ArrayList<Course> courses) {
-        for (int i=0; i < courses.size(); i++){
-            if(!this.courses.contains(courses.get(i))){
-                this.courses.add(courses.get(i));
+        if(this.courses == null){
+            this.courses = courses;
+            for (int i=0; i < courses.size(); i++){
                 courses.get(i).addModule(this);
+            }
+        }
+        else{
+            for (int i=0; i < courses.size(); i++){
+                if(!this.courses.contains(courses.get(i))){
+                    this.courses.add(courses.get(i));
+                    courses.get(i).addModule(this);
+                }
             }
         }
     }

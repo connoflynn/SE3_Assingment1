@@ -39,10 +39,18 @@ public class Course {
     }
 
     public void setModules(ArrayList<Module> modules) {
-        for (int i=0; i < modules.size(); i++){
-            if(!this.modules.contains(modules.get(i))){
-                this.modules.add(modules.get(i));
+        if(this.modules == null){
+            this.modules = modules;
+            for (int i=0; i < modules.size(); i++){
                 modules.get(i).addCourse(this);
+            }
+        }
+        else{
+            for (int i=0; i < modules.size(); i++){
+                if(!this.modules.contains(modules.get(i))){
+                    this.modules.add(modules.get(i));
+                    modules.get(i).addCourse(this);
+                }
             }
         }
     }
@@ -52,10 +60,18 @@ public class Course {
     }
 
     public void setStudents(ArrayList<Student> students) {
-        for (int i=0; i < students.size(); i++){
-            if(!this.students.contains(students.get(i))){
-                this.students.add(students.get(i));
+        if(this.students == null){
+            this.students = students;
+            for (int i=0; i < students.size(); i++){
                 students.get(i).setCourse(this);
+            }
+        }
+        else{
+            for (int i=0; i < students.size(); i++){
+                if(!this.students.contains(students.get(i))){
+                    this.students.add(students.get(i));
+                    students.get(i).setCourse(this);
+                }
             }
         }
     }

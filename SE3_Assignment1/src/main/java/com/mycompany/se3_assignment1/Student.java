@@ -12,8 +12,16 @@ public class Student {
     private String dob;
     private int ID;
     private String username;
-    private Course course;
-    private ArrayList<Module> modules;
+    private Course course = null;
+    private ArrayList<Module> modules = new ArrayList<Module>();
+    
+    public Student(String name, int age, String dob, int ID){
+        this.name = name;
+        this.age = age;
+        this.dob = dob;
+        this.ID = ID;
+        this.username = getUsername(name, age);
+    }
 
     public Student(String name, int age, String dob, int ID, Course course, ArrayList<Module> modules) {
         this.name = name;
@@ -76,13 +84,20 @@ public class Student {
     }
 
     public void setCourse(Course course) {
-        if(!this.course.equals(course)){
+        if(this.course == null){
+            this.course = course;
+            course.addStudent(this);
+        }
+        else if(!this.course.equals(course)){
             this.course = course;
             course.addStudent(this);
         }
     }
     
     public void removeCourse(Course course){
+        if(this.course == null){
+            return;
+        }
         if(this.course.equals(course)){
             this.course = null;
             course.removeStudent(this);
@@ -94,10 +109,18 @@ public class Student {
     }
 
     public void setModules(ArrayList<Module> modules) {
-        for (int i=0; i < modules.size(); i++){
-            if(!this.modules.contains(modules.get(i))){
-                this.modules.add(modules.get(i));
+        if(this.modules == null){
+            this.modules = modules;
+            for (int i=0; i < modules.size(); i++){
                 modules.get(i).addStudent(this);
+            }
+        }
+        else{
+            for (int i=0; i < modules.size(); i++){
+                if(!this.modules.contains(modules.get(i))){
+                    this.modules.add(modules.get(i));
+                    modules.get(i).addStudent(this);
+                }
             }
         }
     }
@@ -114,6 +137,11 @@ public class Student {
             modules.remove(module);
             module.removeStudent(this);
         }
+    }
+    
+    @Override
+    public String toString(){
+        return this.name + " " + ID;
     }
     
 }
