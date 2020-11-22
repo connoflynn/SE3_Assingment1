@@ -147,6 +147,16 @@ public class Student {
         }
     }
     
+    public String printModules(){
+        String output = "";
+        output += "\nModules " + this.name + " is registered for: \n";
+        for(int i=0; i <modules.size(); i ++){
+            output += modules.get(i).toString() + "\n";
+        }
+        output += "\n\n";
+        return output;
+    }
+    
     @Override
     public String toString(){
         String output = "";
