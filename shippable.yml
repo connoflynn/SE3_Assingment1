@@ -3,7 +3,3 @@ language: java
 jdk:
   - openjdk11
   
-build:
-  ci:
-    - mvn clean test jacoco:report
-    
